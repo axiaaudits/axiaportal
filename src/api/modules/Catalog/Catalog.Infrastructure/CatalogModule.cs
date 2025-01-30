@@ -30,6 +30,13 @@ public static class CatalogModule
             brandGroup.MapGetBrandListEndpoint();
             brandGroup.MapBrandUpdateEndpoint();
             brandGroup.MapBrandDeleteEndpoint();
+
+            var firmGroup = app.MapGroup("firms").WithTags("firms");
+            firmGroup.MapFirmCreationEndpoint();
+            firmGroup.MapGetFirmEndpoint();
+            firmGroup.MapGetFirmListEndpoint();
+            firmGroup.MapFirmUpdateEndpoint();
+            firmGroup.MapFirmDeleteEndpoint();
         }
     }
     public static WebApplicationBuilder RegisterCatalogServices(this WebApplicationBuilder builder)
@@ -37,10 +44,15 @@ public static class CatalogModule
         ArgumentNullException.ThrowIfNull(builder);
         builder.Services.BindDbContext<CatalogDbContext>();
         builder.Services.AddScoped<IDbInitializer, CatalogDbInitializer>();
+
         builder.Services.AddKeyedScoped<IRepository<Product>, CatalogRepository<Product>>("catalog:products");
         builder.Services.AddKeyedScoped<IReadRepository<Product>, CatalogRepository<Product>>("catalog:products");
+
         builder.Services.AddKeyedScoped<IRepository<Brand>, CatalogRepository<Brand>>("catalog:brands");
         builder.Services.AddKeyedScoped<IReadRepository<Brand>, CatalogRepository<Brand>>("catalog:brands");
+        //Firm
+        builder.Services.AddKeyedScoped<IRepository<Firm>, CatalogRepository<Firm>>("catalog:firms");
+        builder.Services.AddKeyedScoped<IReadRepository<Firm>, CatalogRepository<Firm>>("catalog:firms");
         return builder;
     }
     public static WebApplication UseCatalogModule(this WebApplication app)

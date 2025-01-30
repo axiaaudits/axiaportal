@@ -9,6 +9,9 @@
     <None Remove="Persistence\Repositories\**" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Remove="Endpoints\v1\FirmEndpoint.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\..\..\framework\Infrastructure\Infrastructure.csproj" />
     <ProjectReference Include="..\Catalog.Application\Catalog.Application.csproj" />
   </ItemGroup>

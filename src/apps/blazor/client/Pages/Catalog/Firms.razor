@@ -1,0 +1,88 @@
+﻿@page "/catalog/firms"
+
+<PageHeader Title="Firms" Header="Firms" SubHeader="Manage your Firms." />
+
+<EntityTable @ref="_table" TEntity="FirmResponse" TId="Guid" TRequest="FirmViewModel" Context="@Context">
+
+    <AdvancedSearchContent>
+        <!-- Add any advanced search content here if needed -->
+    </AdvancedSearchContent>
+
+    <EditFormContent>
+        @* For Update operations, display the FirmId field *@
+        @if (!Context.AddEditModal.IsCreate)
+        {
+            <MudItem xs="12" md="6">
+                <MudTextField Value="context.Id" Underline="false" ReadOnly="true" Label="Firm Id" />
+            </MudItem>
+        }
+
+        <!-- Name field -->
+        <MudItem xs="12" md="6">
+            <MudTextField Label="Firm Name" For="@(() => context.FirmName)" @bind-Value="context.FirmName" />
+        </MudItem>
+
+        <!-- Postal Address field -->
+        <MudItem xs="12" md="6">
+            <MudTextField Label="Postal Address" For="@(() => context.PostalAddress)" @bind-Value="context.PostalAddress" />
+        </MudItem>
+
+        <!-- Suburb field -->
+        <MudItem xs="12" md="6">
+            <MudTextField Label="Suburb" For="@(() => context.Suburb)" @bind-Value="context.Suburb" />
+        </MudItem>
+
+        <!-- State field -->
+        <MudItem xs="12" md="6">
+            <MudTextField Label="State" For="@(() => context.State)" @bind-Value="context.State" />
+        </MudItem>
+
+        <!-- Postal Code field -->
+        <MudItem xs="12" md="6">
+            <MudTextField Label="Postal Code" For="@(() => context.PostalCode)" @bind-Value="context.PostalCode" />
+        </MudItem>
+
+        <!-- Fascimile field -->
+        <MudItem xs="12" md="6">
+            <MudTextField Label="Fascimile" For="@(() => context.Fascimile)" @bind-Value="context.Fascimile" />
+        </MudItem>
+
+        <!-- Phone field -->
+        <MudItem xs="12" md="6">
+            <MudTextField Label="Phone" For="@(() => context.Phone)" @bind-Value="context.Phone" />
+        </MudItem>
+
+        <!-- Firm Code field -->
+        <MudItem xs="12" md="6">
+            <MudTextField Label="Firm Code" For="@(() => context.FirmCode)" @bind-Value="context.FirmCode" />
+        </MudItem>
+
+        <MudItem xs="12" md="12">
+            <MudItem>
+                <div>
+                    @if (!Context.AddEditModal.IsCreate)
+                    {
+                        <MudButton HtmlTag="label" Variant="Variant.Filled" Color="Color.Info" Size="Size.Small" Target="_blank"
+                                   StartIcon="@Icons.Material.Filled.RemoveRedEye" Style="margin-left: 5px;">
+                            View
+                        </MudButton>
+
+                        <MudButton HtmlTag="label" Variant="Variant.Filled" Color="Color.Error" Size="Size.Small"
+                                   StartIcon="@Icons.Material.Filled.Delete" Style="margin-left: 5px;" @onclick="DeleteFirm">
+                            Delete
+                        </MudButton>
+                    }
+                </div>
+            </MudItem>
+        </MudItem>
+    </EditFormContent>
+
+</EntityTable>
+
+@code {
+    private void DeleteFirm()
+    {
+        // Implement delete logic here (e.g., call API to delete the firm)
+        Console.WriteLine("Firm deleted.");
+    }
+}

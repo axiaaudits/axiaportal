@@ -46,7 +46,10 @@ internal static class Extensions
             .WithHeaderStrategy(TenantConstants.Identifier)
             .WithDistributedCacheStore(TimeSpan.FromMinutes(60))
             .WithEFCoreStore<TenantDbContext, FshTenantInfo>();
+
+        //.WithStaticStrategy("root")
         services.AddScoped<ITenantService, TenantService>();
+
         return services;
     }
 
